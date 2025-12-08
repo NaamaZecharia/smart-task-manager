@@ -52,7 +52,6 @@ smart-task-manager/
 
 ### Clone the repo
 
-```bash
 git clone https://github.com/NaamaZecharia/smart-task-manager.git
 cd smart-task-manager
 
