@@ -1,13 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import tasksRouter from './routes/taskRoutes.js';
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Server is running 🚀');
-});
+app.use('/api/tasks', tasksRouter);
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+export default app;
