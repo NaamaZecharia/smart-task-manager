@@ -1,43 +1,57 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import  User  from '../models/user.js';
-import { generateToken } from '../utils/generateToken.js';
+import bcrypt from 'bcrypt';
+import { PrismaClient } from '@prisma/client';
+import { generateToken } from '../utils/generateToken';
+import { hashPassword, matchPassword } from '../utils/hash';
 
-// @desc Register new user
-// @route POST /api/auth/register
+const prisma = new PrismaClient();
+
 export const registerUser = asyncHandler(async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-  const userExists = await User.findOne({ username });
+  const userExists = await prisma.user.findUnique({ where: {username} });
   if (userExists) {
     res.status(400);
     throw new Error('User already exists');
   }
 
-  const user = await User.create({ username, password });
+   const hashedPassword = await hashPassword(password);
+
+   const user = await prisma.user.create({
+    data: {
+      username,
+      password: hashedPassword,
+    },
+  });
 
   res.status(201).json({
-    _id: user._id,
+    _id: user.id,
     username: user.username,
-    token: generateToken(user._id.toString()),
+    token: generateToken(user.id),
   });
 });
 
-// @desc Login user
-// @route POST /api/auth/login
+
 export const loginUser = asyncHandler(async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
-  const user = await User.findOne({ username });
+  const user = await prisma.user.findUnique({where: { username } });
 
-  if (user && await user.matchPassword(password)) {
-    res.json({
-      _id: user._id,
-      username: user.username,
-      token: generateToken(user._id.toString()),
-    });
-  } else {
+  if (!user) {
     res.status(401);
     throw new Error('Invalid credentials');
   }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    res.status(401);
+    throw new Error('Invalid credentials');
+  }
+
+  res.json({
+    id: user.id,
+    username: user.username,
+    token: generateToken(user.id),
+  });
 });

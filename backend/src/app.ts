@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import tasksRouter from './routes/taskRoutes.js';
-import authRoutes from './routes/authRoutes.js'; 
-import { errorHandler } from './middleware/errorMiddleware.js';
+import authRoutes from './routes/authRoutes'; 
+import { errorHandler } from './middleware/errorMiddleware';
+import categoryRoutes from './routes/categoryRoutes';
 
 const app = express();
 
@@ -12,8 +12,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use('/api/tasks', tasksRouter);
 app.use('/api/auth', authRoutes);
+app.use('/api/categories', categoryRoutes);
 app.use(errorHandler);
 
 export default app;

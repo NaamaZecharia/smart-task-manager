@@ -18,8 +18,8 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/add" className="hover:text-yellow-300 transition">
-            Add Task
+          <Link to="/categories" className="hover:text-yellow-300 transition">
+            categories
           </Link>
         </li>
         <li>
