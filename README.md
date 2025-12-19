@@ -1,48 +1,145 @@
-# Invify
+# Invify — Inventory Management SaaS (Full Stack)
 
-**Invify** is a lightweight, full-featured inventory management system designed for small businesses to manage products, categories, and stock levels with ease. Built as a freelance project to demonstrate strong full-stack capabilities using modern web technologies.
+Modern inventory management web app built for small businesses to organize products, categories, and stock workflows with a clean UI and secure APIs.
+
+> **Tech stack:** React + TypeScript + Tailwind (Vite) • Node.js + Express • PostgreSQL + Prisma • JWT Auth • Docker • Vitest
+
+---
+
+## ✨ Why Invify?
+Small businesses often track inventory across spreadsheets, notes, and scattered systems. **Invify** centralizes product and category management with a fast, responsive UI and a secure backend — designed for scalability and clean maintainable code.
 
 ---
 
 ## 🚀 Features
-
-- 🔐 **Authentication** with JWT & bcrypt
-- 🧾 **Category & Product Management**
-- 📦 Track inventory quantities, pricing & descriptions
-- 🧠 **Protected API routes** with middleware enforcement
-- 📊 Ready for future **reporting, order tracking, and analytics**
-- 🛡️ Built with security and scalability in mind
+- **Authentication & Security**
+  - JWT-based authentication
+  - Protected routes & middleware authorization
+- **Inventory Management**
+  - Create / update / delete **Categories**
+  - Create / update / delete **Products**
+  - Clean CRUD API structure with controllers + services
+- **Modern Frontend**
+  - Responsive UI with Tailwind CSS
+  - Component-based architecture
+  - Form handling & client-side validation patterns
+- **Database & Data Modeling**
+  - PostgreSQL schema designed with Prisma ORM
+  - Relational modeling for products and categories
+- **Testing**
+  - Unit + integration tests using **Vitest** and **Testing Library**
+- **Developer Experience**
+  - Dockerized local PostgreSQL setup
+  - Clean repo structure + consistent async error handling
 
 ---
 
-## 🛠️ Tech Stack
-
+## 🧱 Tech Stack
 **Frontend**
-- Vite + React + TypeScript
-- React Router
-- Axios
-- Vitest + React Testing Library
+- React, TypeScript
+- Vite
+- Tailwind CSS
 
 **Backend**
-- Express.js + TypeScript
-- PostgreSQL with Prisma ORM
-- JWT Authentication
-- Express Middleware
-- Docker-ready architecture
+- Node.js, Express
+- JWT authentication
+- REST APIs
+
+**Database**
+- PostgreSQL
+- Prisma ORM
+
+**Tooling**
+- Docker / Docker Compose
+- Git / GitHub
+- Vitest + Testing Library
+
+---
+
+## 🗂️ Project Structure (High Level)
+```
+/frontend
+  /src
+    /components
+    /pages
+    /services
+    /hooks
+/backend
+  /src
+    /routes
+    /controllers
+    /middleware
+    /services
+    /prisma
+```
+
+---
+
+## ✅ Getting Started (Local)
+
+### Prerequisites
+- Node.js (LTS)
+- Docker
+
+### Clone & install
+```bash
+git clone <your-repo-url>
+cd invify
+```
+
+```bash
+cd backend && npm install
+cd ../frontend && npm install
+```
+
+---
+
+## 🐘 Database Setup
+```bash
+docker compose up -d
+npx prisma migrate dev
+npx prisma generate
+```
+
+---
+
+## 🔐 Environment Variables
+Create `.env` in `backend/`:
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/invify"
+JWT_SECRET="your_secret"
+PORT=5000
+```
+
+---
+
+## ▶️ Run the App
+```bash
+cd backend && npm run dev
+cd frontend && npm run dev
+```
 
 ---
 
 ## 🧪 Testing
-
-- Component & integration testing using `Vitest` and `@testing-library/react`
-- Test coverage for core forms & business logic
+```bash
+npm test
+```
 
 ---
 
-## ⚙️ Setup Instructions
+## 🗺️ Roadmap
+- Role-based permissions
+- Inventory alerts
+- Pagination & search
+- Event-driven workflows
+- Serverless deployment
+- AI-assisted features
 
-1. Clone the repository
-2. Set up your `.env` files for frontend and backend
-3. Run Prisma migrations:  
-   ```bash
-   npx prisma migrate dev
+---
+
+## 👩‍💻 Author
+**Naama Bayles**  
+Full Stack Engineer — Austin, TX  
+https://www.linkedin.com/in/naama-bayles-565826134/
